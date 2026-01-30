@@ -1,0 +1,16 @@
+                                                                                                                                                               
+  name: AI Test Generation                                                                                                                                        
+                                                                                                                                                                  
+  on:                                                                                                                                                             
+    pull_request:                                                                                                                                                 
+      branches: [main]                                                                                                                                            
+    workflow_dispatch:                                                                                                                                            
+                                                                                                                                                                  
+  jobs:                                                                                                                                                           
+    ai-tests:                                                                                                                                                     
+      uses: Tejas4560/Tech_Demo/.github/workflows/ai-test-pipeline.yml@Test3                                                                                      
+      with:                                                                                                                                                       
+        min_coverage: 90                                                                                                                                          
+        # repo_url is NOT specified - auto-detect will use this repository!                                                                                       
+      secrets:                                                                                                                                                    
+        GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}  
