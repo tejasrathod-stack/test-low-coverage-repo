@@ -86,6 +86,17 @@ class ShoppingCart:
     def add_promotion(self, promo: Promotion):
         self.applied_promotions.append(promo)
 
+    def apply_bulk_discount(self, threshold: int, discount_percent: float):
+        """
+        Apply a bulk discount if the total number of items in the cart exceeds the threshold.
+        """
+        total_items = sum(self.items.values())
+        if total_items >= threshold:
+            discount_amount = self.calculate_subtotal() * (discount_percent / 100)
+            # Create a dynamic promotion for this bulk discount
+            bulk_promo = Promotion(f"Bulk Discount (> {threshold} items)", "fixed", discount_amount)
+            self.add_promotion(bulk_promo)
+
 class OrderProcessor:
     def __init__(self):
         self.orders = []
