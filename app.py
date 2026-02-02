@@ -186,3 +186,19 @@ def validate_phone(phone: str) -> bool:
 def validate_age(age: int) -> bool:
     """Validate age is reasonable."""
     return 0 <= age <= 150
+
+
+# ============ NEW FUNCTIONS (to be tested) ============
+
+def calculate_circle_area(radius: float) -> float:
+    """Calculate area of a circle given its radius."""
+    if radius < 0:
+        raise ValueError("Radius cannot be negative")
+    import math
+    return math.pi * (radius ** 2)
+
+
+def format_currency(amount: float, currency: str = "USD") -> str:
+    """Format a number as a currency string."""
+    return f"{currency} {amount:,.2f}"
+
