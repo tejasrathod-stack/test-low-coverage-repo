@@ -6,7 +6,7 @@ on:
 
 jobs:
   ai-tests:
-    uses: Tejas4560/Tech_Demo/.github/workflows/ai-test-pipeline-v2.yml@T1
+    uses: Tejas4560/improved-testgen/.github/workflows/ai-test-pipeline-v2.yml@T1
     with:
       min_coverage: '80'
       delta_threshold: '5'
