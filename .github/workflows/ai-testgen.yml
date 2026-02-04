@@ -1,16 +1,20 @@
-name: Run AI Tests
+# .github/workflows/ai-testgen.yml (in your consumer repo)
+name: AI Test Generation
 
 on:
-  push:
-    branches: [main,master]
+  workflow_dispatch:
 
 jobs:
-  ai-tests:
+  run-tests:
     uses: Tejas4560/improved-testgen/.github/workflows/ai-test-pipeline-v2.yml@T1
+    # Grant required permissions to the called workflow
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+      pull-requests: write
     with:
       min_coverage: '80'
-      delta_threshold: '5'
-      deploy_pages: true
     secrets:
       AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
       AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT }}
