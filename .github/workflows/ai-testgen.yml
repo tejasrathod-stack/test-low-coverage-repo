@@ -1,46 +1,25 @@
-name: AI Test Generation
 
+name: AI Test Generation
 on:
   workflow_dispatch:
-    inputs:
-      bug_validation:
-        description: 'Bug validation mode (seeded|mutation|off)'
-        required: false
-        default: 'seeded'
-        type: choice
-        options:
-          - seeded
-          - mutation
-          - off
-      min_kill_rate:
-        description: 'Minimum bug kill rate threshold (%)'
-        required: false
-        default: '30'
-        type: string
-      min_coverage:
-        description: 'Minimum coverage threshold (%)'
-        required: false
-        default: '80'
-        type: string
 
 jobs:
   run-tests:
-    uses: tejasrathod-stack/improved-testgen/.github/workflows/ai-test-pipeline-v2.yml@cleanup/remove-duplicates
-    
+    uses: tejasrathod-stack/improved-testgen/.github/workflows/ai-test-pipeline-v2.yml@stable/v1.0-working-pipeline
+
+
+
     permissions:
       contents: write        # Required for pushing to branch
       pages: write
       id-token: write
       pull-requests: write
-    
     with:
-      min_coverage: ${{ inputs.min_coverage || '80' }}
-      auto_push_tests: 'true'
-      tests_branch: 'ai-generated-tests'
-      bug_validation: ${{ inputs.bug_validation || 'seeded' }}      # ← NEW!
-      min_kill_rate: ${{ inputs.min_kill_rate || '30' }}            # ← NEW!
-    
+      min_coverage: '80'
+      auto_push_tests: 'true'                    # ← ADD THIS
+      tests_branch: 'ai-generated-tests'         # ← OPTIONAL (this is default)
     secrets:
       AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
       AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT }}
       AZURE_OPENAI_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_DEPLOYMENT }}
+      # GIT_PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # ← Uses GITHUB_TOKEN by default
