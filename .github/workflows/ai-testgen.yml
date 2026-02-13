@@ -14,7 +14,7 @@ jobs:
       id-token: write
       pull-requests: write
     with:
-      min_coverage: '80'
+      min_coverage: '90'
       auto_push_tests: 'true'                    # ← ADD THIS
       tests_branch: 'ai-generated-tests'         # ← OPTIONAL (this is default)
     secrets:
